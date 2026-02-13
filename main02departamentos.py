@@ -3,6 +3,29 @@ from services import service02oracledepartamentos as serv
 print("Bienvenido a mi Servicio Departamentos")
  #creamos la clase servicio
 servicio = serv.ServiceDepartamentos()
+#Queremos hacer un menu simple
+
+print("-----Menu de Viernes-----")
+print("1.- Insertar departamento")
+print("2.- Mostrar departamentos")
+print("Seleccione opción")
+opcion = int(input())
+
+if (opcion == 1):
+    #Codigo de insertar
+    print("Insertar departamento")
+    numero = int(input("ID departamento: "))
+    nombre = input("Nombre departamento: ")
+    localidad = input("Localidad: ")
+    reg = servicio.insertarDepartamento(numero, nombre, localidad)
+    print(f"Insertados: {reg}")
+else:
+    #Codigo de mostrar
+    print("----Lista Departamentos----")
+    lista = servicio.getListaDepartamentos()
+    for dept in lista:
+        print(f"{dept.idDepartamento} - {dept.nombre} - {dept.localizacion}")
+
 # print("Insertar departamento")
 # numero = int(input("ID departamento: "))
 # nombre = input("Nombre departamento: ")
@@ -28,8 +51,8 @@ servicio = serv.ServiceDepartamentos()
 # dept = servicio.getDepartamento(id)
 # print(f"Nombre: {dept.nombre}, Localidad: {dept.localizacion}")
 
-print("----Lista Departamentos----")
-lista = servicio.getListaDepartamentos()
-for dept in lista:
-    print(f"{dept.idDepartamento} - {dept.nombre} - {dept.localizacion}")
+# print("----Lista Departamentos----")
+# lista = servicio.getListaDepartamentos()
+# for dept in lista:
+#     print(f"{dept.idDepartamento} - {dept.nombre} - {dept.localizacion}")
 
