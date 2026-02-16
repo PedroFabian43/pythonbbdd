@@ -7,8 +7,12 @@ class ServiceDoctores:
         #Inicializamos la conexion directamente con esto
         self.connection = oracledb.connect(user = "SYSTEM", password = "oracle", dsn = "localhost/FREEPDB1")
 
-    def insertarDoctor(self, idHos, idDoc, nombre, especialidad, salario):
+    def insertarDoctor(self, idHos, nombre, especialidad, salario):
         cursor = self.connection.cursor()
+        sql = "SELECT MAX(DOCTOR_NO) + 1 AS MAXIMO FROM DOCTOR"
+        cursor.execute(sql)
+        row = cursor.fetchone()
+        idDoc = row[0]
         sql = "INSERT INTO DOCTOR VALUES (:idhos, :idDoc, :nom, :espe, :dinero)"
         cursor.execute(sql, (idHos, idDoc, nombre, especialidad, salario,))
         self.connection.commit()

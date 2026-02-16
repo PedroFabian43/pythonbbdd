@@ -1,4 +1,5 @@
 from services import service04oracledoctores as serv
+import os
 
 service = serv.ServiceDoctores()
 
@@ -6,11 +7,11 @@ def mostrarDoctores():
     lista = service.getDoctores()
     print("----Lista de Doctores----")
     for doctor in lista:
-        print(f"Id_Hospital: {doctor.idHospital} / Num_Doctor: {doctor.idDoctor} / Nombre: {doctor.nombre} / Especialidad: {doctor.especialidad} / Salario: {doctor.salario}")
-        print("--------------------------------------------------------------------------------------------------")
+        print(f"Id_Hospital: {doctor.idHospital} \nNum_Doctor: {doctor.idDoctor} \nNombre: {doctor.nombre} \nEspecialidad: {doctor.especialidad} \nSalario: {doctor.salario}")
+        print("----------------------------------")
 
 def menuDoctores():
-    print("-----Plantilla de Doctores-----")
+    print("-----Base de Datos de Doctores-----")
     print("¿Que desea hacer?")
     print("1.- Insertar Doctor")
     print("2.- Mostrar Doctores")
@@ -19,26 +20,32 @@ def menuDoctores():
     print("5.- Salir de la aplicación")
     print("Seleccione una opción:")
 
+def clear():
+    os.system("clear")
+
+clear()
 bucleMenu = False
 opcion = 0
 while(bucleMenu != True):
     menuDoctores()
     opcion = int(input())
 
-    if (opcion >= 6 or opcion <= 0):
-        print("Has salido de la aplicación")
+    if (opcion == 5):
+        clear()
         break
 
     if(opcion == 1):
         id = int(input("Dime el Id del Hospital: "))
-        num_doc = int(input("Dime el número de Doctor: "))
         nombre = input("Dime el nombre: ")
         funcion = input("Dime su especialidad: ")
         salario = int(input("Dime cuanto gana: "))
-        service.insertarDoctor(id, num_doc, nombre, funcion, salario)
+        service.insertarDoctor(id, nombre, funcion, salario)
+        clear()
+        print("Doctor añadido con éxito")
         mostrarDoctores()
 
     elif(opcion == 2):
+        clear()
         mostrarDoctores()
 
     elif(opcion == 3):
@@ -47,11 +54,19 @@ while(bucleMenu != True):
         funcion = input("Dime su especialidad: ")
         salario = int(input("Dime cuanto gana: "))
         service.updateDoctor(idDoc, nombre, funcion, salario)
+        clear()
+        print("Datos modificados con éxito")
         mostrarDoctores()
 
     elif(opcion == 4):
         id = int(input("Dime el id del Doctor a eliminar: "))
         service.deleteDoctor(id)
+        clear()
+        print("Doctor eliminado con éxito")
         mostrarDoctores()
+    
+    else:
+        clear()
+        print("Opción inválida. Elige una opción diferente")
 
-print("Fin de Programa")
+print("has salido de la aplicación")
